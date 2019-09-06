@@ -29,18 +29,20 @@ namespace Conway.ConsoleUI
             int x = 0;
             int rowLength = currentState.GetUpperBound(1) + 1;
 
+            var output = new StringBuilder();
+
             // Draw our grid, row by row
             foreach (var state in currentState)
             {
-                var output = state == CellState.Alive ? "O" : ".";
-                Console.Write(output);
+                output.Append(state == CellState.Alive ? "O" : ".");
                 x++;
                 if (x >= rowLength)
                 {
                     x = 0;
-                    Console.WriteLine();
+                    output.AppendLine();
                 }
             }
+            Console.WriteLine(output.ToString());
         }
     }
 }
