@@ -8,17 +8,24 @@ namespace Conway.Library
 {
     public class LifeGrid
     {
+
+        int gridHeight;
+        int gridWidth;
+
         public CellState[,] CurrentState;
         private CellState[,] _nextState;
 
-        public LifeGrid()
+        public LifeGrid(int height, int width)
         {
-            CurrentState = new CellState[5, 5];
-            _nextState = new CellState[5, 5];
+            gridHeight = height;
+            gridWidth = width;
 
-            for (int i = 0; i < 5; i++)
+            CurrentState = new CellState[gridHeight, gridWidth];
+            _nextState = new CellState[gridHeight, gridWidth];
+
+            for (int i = 0; i < gridHeight; i++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < gridWidth; j++)
                 {
                     CurrentState[i, j] = CellState.Dead;
                 }
@@ -31,16 +38,16 @@ namespace Conway.Library
         /// </summary>
         public void UpdateState()
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < gridHeight; i++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < gridWidth; j++)
                 {
                     var liveNeighbors = GetLiveNeighbors(i, j);
                     _nextState[i, j] = LifeRules.GetNewState(CurrentState[i, j], liveNeighbors);
                 }
             }
             CurrentState = _nextState;
-            _nextState = new CellState[5, 5];
+            _nextState = new CellState[gridHeight, gridWidth];
         }
 
         /// <summary>
@@ -65,8 +72,8 @@ namespace Conway.Library
                     int neighborY = coordY + y;
 
                     // Make sure our "neighbor" cell is inside our grid
-                    if (neighborX >= 0 && neighborX < 5 && 
-                        neighborY >= 0 && neighborY < 5)
+                    if (neighborX >= 0 && neighborX < gridHeight && 
+                        neighborY >= 0 && neighborY < gridWidth)
                     {
                         if (CurrentState[neighborX, neighborY] == CellState.Alive)
                             liveNeighbors++;
@@ -74,8 +81,6 @@ namespace Conway.Library
 
                 }
             }
-
-
             return liveNeighbors;
         }
     }
