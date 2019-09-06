@@ -53,10 +53,10 @@ namespace Conway.Library
         /// <summary>
         /// Check how many neighboring cells 
         /// </summary>
-        /// <param name="coordX"></param>
-        /// <param name="coordY"></param>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
         /// <returns></returns>
-        private int GetLiveNeighbors(int coordX, int coordY)
+        private int GetLiveNeighbors(int row, int column)
         {
             int liveNeighbors = 0;
 
@@ -68,8 +68,8 @@ namespace Conway.Library
                     if (x == 0 && y == 0)
                         continue;
 
-                    int neighborX = coordX + x;
-                    int neighborY = coordY + y;
+                    int neighborX = row + x;
+                    int neighborY = column + y;
 
                     // Make sure our "neighbor" cell is inside our grid
                     if (neighborX >= 0 && neighborX < gridHeight && 
