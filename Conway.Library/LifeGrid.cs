@@ -83,5 +83,19 @@ namespace Conway.Library
             }
             return liveNeighbors;
         }
+
+        public void Randomize()
+        {
+            Random rng = new Random();
+            for (int i = 0; i < gridHeight; i++)
+            {
+                for (int j = 0; j < gridWidth; j++)
+                {
+                    var next = rng.Next(2);
+                    var newState = next < 1 ? CellState.Dead : CellState.Alive;
+                    CurrentState[i, j] = newState;
+                }
+            }
+        }
     }
 }

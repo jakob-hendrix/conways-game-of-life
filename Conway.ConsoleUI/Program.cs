@@ -11,12 +11,8 @@ namespace Conway.ConsoleUI
     {
         static void Main(string[] args)
         {
-            var grid = new LifeGrid(5, 5);
-
-            // Seed our organism
-            grid.CurrentState[1, 2] = CellState.Alive;
-            grid.CurrentState[2, 2] = CellState.Alive;
-            grid.CurrentState[3, 2] = CellState.Alive;
+            var grid = new LifeGrid(25, 65);
+            grid.Randomize();
 
             ShowGrid(grid.CurrentState);
 
@@ -31,7 +27,7 @@ namespace Conway.ConsoleUI
         {
             Console.Clear();
             int x = 0;
-            int rowLength = currentState.GetUpperBound(0) + 1;
+            int rowLength = currentState.GetUpperBound(1) + 1;
 
             // Draw our grid, row by row
             foreach (var state in currentState)
